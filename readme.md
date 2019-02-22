@@ -52,6 +52,12 @@ So, `Range Retention` consists in:
 
 In this section we provide an approach to calculate `Range Retention`.
 
+This [Jupyter notebook](https://github.com/slalom/medium-rangeretention/blob/master/notebook/range-retention.ipynb) provides all the code. Feel free to clone this [Github repo](https://github.com/slalom/medium-rangeretention.git) to get all the artifacts of this post:
+
+```bash
+$ git clone https://github.com/slalom/medium-rangeretention.git
+```
+
 
 ### Raw data
 
@@ -66,7 +72,41 @@ Ensure your data is loaded in a dataframe of your favorite flavor and that the c
 
 
 ### Define the cohorts
+Let's pick the months as our "chunks" so the `cohort ID` are going to be the month when the user first joined the as a customer: `joined_month`. You will want to create a dataframe mapping the `customer_id` with the cohort. The head of this dataframe would look like this:
 
-You will want to create a dataframe wich maps
+![](img/cohorts_df.png)
 
+
+### Get the cohort sizes
+
+Next, you want to create another dataframe which maps each `joined_month` with the number of unique `customer_id`.
+
+![](img/cohort_sizes_df.png)
+
+
+### Update the raw data with `cohort ID` and `activity index`
+
+The next step is to go back to the raw orders data and to add a couple of useful columns to it. For each order row, we will want to add `joined_month` (= `cohort ID`) based on the customer ID and an `activity_index` which is based on order date and the join date. The `activity_index` captures how many chunks after the join date the order was placed at, ex: for a `join_month` of Janurary (`1`), then an order placed in March will have an `activity_index` of `2` (*activity is 2 months after first contact*).
+
+Selecting only the columns of interest, we now have one row per order identifying which customer placed the order, which cohort (`join_month`) and how many months after joining the order was placed (`activity_index`):
+
+![](img/df.png)
+
+
+### Get the number of returning customers 
+
+Count the number of returning customers per cohort, per month:
+
+![](img/activity_size_df.png)
+
+
+### Calculate the `Range Retention` table
+
+Join the counts, make a division...
+![](img/retention_df.png)
+
+
+...pivot and you're done!
+
+![](img/retention_tbl.png)
 
