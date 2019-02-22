@@ -18,11 +18,7 @@ Retention is an observational metric used by organizations to evaluate how much 
 
 So what's the big deal I hear you ask? Sounds like retention can easily be defined as a single number given by this formula:
 
-$$
-\begin{equation}
-R = \frac{Number\ of\ unique\ users\ who\ interacted\ more\ than\ once \ with\ the\ organization}{Number\ of\ unique\ users\ who\ interacted\ with\ the\ organization}
-\end{equation}
-$$
+![](img/formula.png)
 
 
 ### Not so fast...
@@ -38,6 +34,7 @@ One (popular) way to address this is to get a tad more refined by calculating mu
  * ...
  * Users who made first contact in November: what proportion came back in December?
 
+Our formula is still valid it just no longer applies to all users and all time, instead it is specific to users who made first contact during a select chunck and came back during a later one.
 
 So, `Range Retention` consists in:
 
@@ -53,7 +50,15 @@ So, `Range Retention` consists in:
 
 ## How to calculate `Range Retention`?
 
-In this section we provide a data manipulation approach to calculate `Range Retention`.
+In this section we provide an approach to calculate `Range Retention`.
+
+
+### Raw data
+
+Let's start with a table containing orders data for year 2004 filtered to retain only customers who made first contact in 2004. The table could look like this:
+
+![](img/rawdata.png)
+
 
 ### The basics
 Ensure your data is loaded in a dataframe of your favorite flavor and that the column types are what they need to be. In addition make sure there is one column capturing the "chunk ID" (ex: month or week number). 
