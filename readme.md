@@ -44,7 +44,7 @@ You can see we are about to calculate a triangular table containing interesting 
 
 
 
-## An approach to calculate `Range Retention`?
+## An approach to calculate `Range Retention`
 
 This section details my approach to calculate the `Range Retention` table, based on an example. We will analyze orders data to get to the "retention story" of a ficticious store. Our period of interest is the year 2004, our windows are going to be monthly and a user cohort is the month when the user made first contact with the store. Note data has been filtered to retain only customers who made first contact in 2004: we want to limit our analysis to new customers.
 
@@ -106,7 +106,7 @@ Join the counts, make a division...
 
 ![](img/retention_tbl.png)
 
-Note: the `0`s in the lower triangle are in fact `NA`s which have been replaced to allow for the nice cell-by-cell shading, see [this issue](https://github.com/pandas-dev/pandas/issues/14260) for details.
+*Note the `0`s in the lower triangle are in fact `NA`s which have been replaced to allow for the nice cell-by-cell shading, see [this issue](https://github.com/pandas-dev/pandas/issues/14260) for details.*
 
 ## Gimme the good stuff
 
